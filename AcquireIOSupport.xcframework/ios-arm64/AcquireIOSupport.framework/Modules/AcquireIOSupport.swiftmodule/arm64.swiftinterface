@@ -1,12 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AcquireIOSupport
 import AVFoundation
 import AVKit
 @_exported import AcquireIOSupport
+import AudioToolbox
 import CoreData
 import Foundation
 import MobileCoreServices
+import ObjectiveC
 import Photos
 import SafariServices
 import SocketIO
@@ -16,18 +18,126 @@ import TwilioVideo
 import UIKit.UIFont
 import UIKit
 import WebKit
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class AcquireIOConfig : ObjectiveC.NSObject {
+  @objc public static let config: AcquireIOSupport.AcquireIOConfig
+  @objc final public var buttonImageName: Swift.String {
+    get
+  }
+  @objc final public var themeOptions: [Swift.String : Any] {
+    get
+  }
+  @objc final public var showThreadList: Swift.Bool {
+    get
+  }
+  @objc final public var showChatButton: Swift.Bool {
+    get
+  }
+  @objc final public var showVideoButton: Swift.Bool {
+    get
+  }
+  @objc final public var showAudioButton: Swift.Bool {
+    get
+  }
+  @objc final public var showLocalNotificationInApp: Swift.Bool {
+    get
+  }
+  @objc final public var disableAttachment: Swift.Bool {
+    get
+  }
+  @objc final public var sessionConnectAndStartAuto: Swift.Bool {
+    get
+  }
+  @objc final public var isHideNewChat: Swift.Bool {
+    get
+  }
+  @objc final public var disableNetworkMessage: Swift.Bool {
+    get
+  }
+  @objc final public func setDict(_ dict: [Swift.String : Any])
+  @objc deinit
+}
 extension UIFont {
   public static let loadAcquireIOSupportFonts: ()
 }
-public enum ReachabilityError : Swift.Error {
-  case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
-  case failedToCreateWithHostname(Swift.String, Swift.Int32)
-  case unableToSetCallback(Swift.Int32)
-  case unableToSetDispatchQueue(Swift.Int32)
-  case unableToGetFlags(Swift.Int32)
+@objc public enum ChannelType : Swift.Int {
+  case chat = 1
+  case audio = 2
+  case video = 3
+  public init(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
 }
-@available(*, unavailable, renamed: "Notification.Name.AIOreachabilityChanged")
-public let ReachabilityChangedNotification: Foundation.NSNotification.Name
+extension UIView {
+  public func makeToast(_ message: Swift.String?, duration: Foundation.TimeInterval = ToastManager.shared.duration, position: AcquireIOSupport.ToastPosition = ToastManager.shared.position, title: Swift.String? = nil, image: UIKit.UIImage? = nil, style: AcquireIOSupport.ToastStyle = ToastManager.shared.style, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func makeToast(_ message: Swift.String?, duration: Foundation.TimeInterval = ToastManager.shared.duration, point: CoreGraphics.CGPoint, title: Swift.String?, image: UIKit.UIImage?, style: AcquireIOSupport.ToastStyle = ToastManager.shared.style, completion: ((Swift.Bool) -> Swift.Void)?)
+  public func showToast(_ toast: UIKit.UIView, duration: Foundation.TimeInterval = ToastManager.shared.duration, position: AcquireIOSupport.ToastPosition = ToastManager.shared.position, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func showToast(_ toast: UIKit.UIView, duration: Foundation.TimeInterval = ToastManager.shared.duration, point: CoreGraphics.CGPoint, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func hideToast()
+  public func hideToast(_ toast: UIKit.UIView)
+  public func hideAllToasts(includeActivity: Swift.Bool = false, clearQueue: Swift.Bool = true)
+  public func clearToastQueue()
+  public func makeToastActivity(_ position: AcquireIOSupport.ToastPosition)
+  public func makeToastActivity(_ point: CoreGraphics.CGPoint)
+  public func hideToastActivity()
+  public func toastViewForMessage(_ message: Swift.String?, title: Swift.String?, image: UIKit.UIImage?, style: AcquireIOSupport.ToastStyle) throws -> UIKit.UIView
+}
+public struct ToastStyle {
+  public init()
+  public var backgroundColor: UIKit.UIColor
+  public var titleColor: UIKit.UIColor
+  public var messageColor: UIKit.UIColor
+  public var maxWidthPercentage: CoreGraphics.CGFloat {
+    get
+    set
+  }
+  public var maxHeightPercentage: CoreGraphics.CGFloat {
+    get
+    set
+  }
+  public var horizontalPadding: CoreGraphics.CGFloat
+  public var verticalPadding: CoreGraphics.CGFloat
+  public var cornerRadius: CoreGraphics.CGFloat
+  public var titleFont: UIKit.UIFont
+  public var messageFont: UIKit.UIFont
+  public var titleAlignment: UIKit.NSTextAlignment
+  public var messageAlignment: UIKit.NSTextAlignment
+  public var titleNumberOfLines: Swift.Int
+  public var messageNumberOfLines: Swift.Int
+  public var displayShadow: Swift.Bool
+  public var shadowColor: UIKit.UIColor
+  public var shadowOpacity: Swift.Float {
+    get
+    set
+  }
+  public var shadowRadius: CoreGraphics.CGFloat
+  public var shadowOffset: CoreGraphics.CGSize
+  public var imageSize: CoreGraphics.CGSize
+  public var activitySize: CoreGraphics.CGSize
+  public var fadeDuration: Swift.Double
+  public var activityIndicatorColor: UIKit.UIColor
+  public var activityBackgroundColor: UIKit.UIColor
+}
+@_hasMissingDesignatedInitializers public class ToastManager {
+  public static let shared: AcquireIOSupport.ToastManager
+  public var style: AcquireIOSupport.ToastStyle
+  public var isTapToDismissEnabled: Swift.Bool
+  public var isQueueEnabled: Swift.Bool
+  public var duration: Swift.Double
+  public var position: AcquireIOSupport.ToastPosition
+  @objc deinit
+}
+public enum ToastPosition {
+  case top
+  case center
+  case bottom
+  public static func == (a: AcquireIOSupport.ToastPosition, b: AcquireIOSupport.ToastPosition) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
 @objc public enum StartChannelType : Swift.Int {
   case audio = 0
   case video
@@ -86,13 +196,14 @@ public let ReachabilityChangedNotification: Foundation.NSNotification.Name
     get
   }
 }
-public protocol AcquireIODelegate {
-  func didChangeConnectionStatus(status: AcquireIOSupport.AcquireIOConnectionStatus)
-  func didChangeAgentStatus(agentID: Swift.String, andStatus status: AcquireIOSupport.AcquireIOAgentStatus)
-  func onError(error: Swift.Error)
-  func hideSupport()
-  func didReceiveTriggerEvent(_ eventName: Swift.String)
-  func didUserInteracted(withEvent type: AcquireIOSupport.AcquireIOInteractionEventType, withData data: [Swift.String : Any]?)
+@objc public protocol AcquireIODelegate {
+  @objc func didChangeConnectionStatus(status: AcquireIOSupport.AcquireIOConnectionStatus)
+  @objc func didChangeAgentStatus(agentID: Swift.String, andStatus status: AcquireIOSupport.AcquireIOAgentStatus)
+  @objc func onError(error: Swift.Error)
+  @objc func hideSupport()
+  @objc func didReceiveTriggerEvent(_ eventName: Swift.String)
+  @objc func didUserInteracted(withEvent type: AcquireIOSupport.AcquireIOInteractionEventType, withData data: [Swift.String : Any]?)
+  @objc func didReceiveNewMessage(_ message: Any)
 }
 extension AcquireIODelegate {
   public func didChangeConnectionStatus(status: AcquireIOSupport.AcquireIOConnectionStatus)
@@ -101,58 +212,39 @@ extension AcquireIODelegate {
   public func onError(error: Swift.Error)
   public func didReceiveTriggerEvent(_ eventName: Swift.String)
   public func didUserInteracted(withEvent type: AcquireIOSupport.AcquireIOInteractionEventType, withData data: [Swift.String : Any]?)
+  public func didReceiveNewMessage(_ message: Any)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class AcquireIO : ObjectiveC.NSObject {
   @objc public static let support: AcquireIOSupport.AcquireIO
-  final public var delegate: AcquireIOSupport.AcquireIODelegate?
-  @objc final public func setAccount(_ accountUID: Swift.String, withOptions optionDictionary: AcquireIOSupport.AcquireIOConfig?)
+  @objc final public var delegate: AcquireIOSupport.AcquireIODelegate?
+  @objc final public func setAccount(_ accountUID: Swift.String, domain: Swift.String = "acquire.io", withOptions optionDictionary: AcquireIOSupport.AcquireIOConfig?)
   @objc deinit
 }
 extension AcquireIO {
   @objc final public func showSupport(_ viewController: UIKit.UIViewController)
+  @objc final public func showSupport(_ viewController: UIKit.UIViewController, withMessage message: Swift.String)
   @objc final public func startSession()
   @objc final public func startDirectSupportChat(type: AcquireIOSupport.ChannelType)
   @objc final public func setVisitorHash(_ visitorHash: Swift.String)
   @objc final public func getVisitorId() -> Swift.String
   @objc final public func setVisitorDetails(_ data: [Swift.String : Any])
+  @objc final public func setVisitorIdentityFields(_ data: [Swift.String : Any])
   @objc final public func logoutVisitor()
   @objc final public func getAvailableAgentCount() -> Swift.Int
+  @objc final public func getOnlineAgentIDs() -> [Foundation.NSNumber]
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class AcquireIOConfig : ObjectiveC.NSObject {
-  @objc public static let config: AcquireIOSupport.AcquireIOConfig
-  @objc final public var buttonImageName: Swift.String {
-    get
-  }
-  @objc final public var themeOptions: [Swift.String : Any] {
-    get
-  }
-  @objc final public var showThreadList: Swift.Bool {
-    get
-  }
-  @objc final public var showChatButton: Swift.Bool {
-    get
-  }
-  @objc final public var showVideoButton: Swift.Bool {
-    get
-  }
-  @objc final public var showAudioButton: Swift.Bool {
-    get
-  }
-  @objc final public var showLocalNotificationInApp: Swift.Bool {
-    get
-  }
-  @objc final public var disableAttachment: Swift.Bool {
-    get
-  }
-  @objc final public var sessionConnectAndStartAuto: Swift.Bool {
-    get
-  }
-  @objc final public var isHideNewChat: Swift.Bool {
-    get
-  }
-  @objc final public func setDict(_ dict: [Swift.String : Any])
-  @objc deinit
+extension AcquireIO {
+  @objc final public func dismissChatSupport()
 }
+public enum ReachabilityError : Swift.Error {
+  case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
+  case failedToCreateWithHostname(Swift.String, Swift.Int32)
+  case unableToSetCallback(Swift.Int32)
+  case unableToSetDispatchQueue(Swift.Int32)
+  case unableToGetFlags(Swift.Int32)
+}
+@available(*, unavailable, renamed: "Notification.Name.AIOreachabilityChanged")
+public let ReachabilityChangedNotification: Foundation.NSNotification.Name
 extension UIDevice {
   public var type: AcquireIOSupport.Model {
     get
@@ -163,16 +255,6 @@ public enum Model : Swift.String {
   public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
-    get
-  }
-}
-@objc public enum ChannelType : Swift.Int {
-  case chat = 1
-  case audio = 2
-  case video = 3
-  public init(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
     get
   }
 }
@@ -278,6 +360,11 @@ extension CDVisitorData {
     @objc set
   }
 }
+extension AcquireIOSupport.ChannelType : Swift.Equatable {}
+extension AcquireIOSupport.ChannelType : Swift.Hashable {}
+extension AcquireIOSupport.ChannelType : Swift.RawRepresentable {}
+extension AcquireIOSupport.ToastPosition : Swift.Equatable {}
+extension AcquireIOSupport.ToastPosition : Swift.Hashable {}
 extension AcquireIOSupport.StartChannelType : Swift.Equatable {}
 extension AcquireIOSupport.StartChannelType : Swift.Hashable {}
 extension AcquireIOSupport.StartChannelType : Swift.RawRepresentable {}
@@ -293,6 +380,3 @@ extension AcquireIOSupport.AcquireIOInteractionEventType : Swift.RawRepresentabl
 extension AcquireIOSupport.Model : Swift.Equatable {}
 extension AcquireIOSupport.Model : Swift.Hashable {}
 extension AcquireIOSupport.Model : Swift.RawRepresentable {}
-extension AcquireIOSupport.ChannelType : Swift.Equatable {}
-extension AcquireIOSupport.ChannelType : Swift.Hashable {}
-extension AcquireIOSupport.ChannelType : Swift.RawRepresentable {}
