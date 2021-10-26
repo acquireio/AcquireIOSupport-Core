@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AcquireIOSupport
 import AVFoundation
 import AVKit
 @_exported import AcquireIOSupport
 import AudioToolbox
 import CoreData
+import CoreGraphics
 import Foundation
 import MobileCoreServices
 import ObjectiveC
@@ -15,9 +16,121 @@ import SocketIO
 import Swift
 import SystemConfiguration
 import TwilioVideo
-import UIKit.UIFont
 import UIKit
 import WebKit
+public enum ReachabilityError : Swift.Error {
+  case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
+  case failedToCreateWithHostname(Swift.String, Swift.Int32)
+  case unableToSetCallback(Swift.Int32)
+  case unableToSetDispatchQueue(Swift.Int32)
+  case unableToGetFlags(Swift.Int32)
+}
+@available(*, unavailable, renamed: "Notification.Name.AIOreachabilityChanged")
+public let ReachabilityChangedNotification: Foundation.NSNotification.Name
+extension UIFont {
+  public static let loadAcquireIOSupportFonts: ()
+}
+@objc public enum StartChannelType : Swift.Int {
+  case audio = 0
+  case video
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum AcquireIOAgentStatus : Swift.Int {
+  case online = 0
+  case offline
+  case invisible
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum AcquireIOConnectionStatus : Swift.Int {
+  case notConnected = 0
+  case disconnected
+  case connecting
+  case connected
+  case sessionStarted
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum AcquireIOInteractionEventType : Swift.Int {
+  case audioCallStarted = 0
+  case videoCallStarted
+  case audioCallAnswered
+  case videoCallAnswered
+  case callDeclined
+  case callAutoDeclined
+  case callerViewMinimize
+  case callerViewMaximize
+  case callerViewCameraSwitchToFront
+  case callerViewCameraSwitchToBack
+  case callSpeakerOn
+  case callSpeakerOff
+  case callMute
+  case callUnmute
+  case callVideoOn
+  case callVideoOff
+  case callDisconnected
+  case conversationStart
+  case conversationEnd
+  case conversationFeedbackSubmit
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol AcquireIODelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func didChangeConnectionStatus(status: AcquireIOSupport.AcquireIOConnectionStatus)
+  @objc optional func didChangeAgentStatus(agentID: Swift.String, andStatus status: AcquireIOSupport.AcquireIOAgentStatus)
+  @objc optional func onError(error: Swift.Error)
+  @objc optional func didOpenAcquireSupport()
+  @objc optional func hideSupport()
+  @objc optional func didReceiveTriggerEvent(_ eventName: Swift.String)
+  @objc optional func didUserInteracted(withEvent type: AcquireIOSupport.AcquireIOInteractionEventType, withData data: [Swift.String : Any]?)
+  @objc optional func didReceiveNewMessage(_ message: Any)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class AcquireIO : ObjectiveC.NSObject {
+  @objc public static let support: AcquireIOSupport.AcquireIO
+  @objc weak final public var delegate: AcquireIOSupport.AcquireIODelegate?
+  @objc final public func setAccount(_ accountUID: Swift.String, domain: Swift.String? = "acquire.io", withOptions optionDictionary: AcquireIOSupport.AcquireIOConfig?)
+  @objc deinit
+}
+extension AcquireIO {
+  @objc final public func showSupport(_ viewController: UIKit.UIViewController)
+  @objc final public func showSupport(_ viewController: UIKit.UIViewController, withMessage message: Swift.String)
+  @objc final public func startSession()
+  @objc final public func startDirectSupportChat(type: AcquireIOSupport.ChannelType)
+  @objc final public func setVisitorHash(_ visitorHash: Swift.String)
+  @objc final public func getVisitorId() -> Swift.String
+  @objc final public func setVisitorDetails(_ data: [Swift.String : Any])
+  @objc final public func updateVisitorDetails(_ data: [Swift.String : Any])
+  @objc final public func setVisitorIdentityFields(_ data: [Swift.String : Any])
+  @objc final public func logoutVisitor()
+  @objc final public func getAvailableAgentCount() -> Swift.Int
+  @objc final public func getOnlineAgentIDs() -> [Foundation.NSNumber]
+}
+extension AcquireIO {
+  @objc final public func dismissChatSupport()
+}
+@objc public enum ChannelType : Swift.Int {
+  case chat = 1
+  case audio = 2
+  case video = 3
+  public init(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class AcquireIOConfig : ObjectiveC.NSObject {
   @objc public static let config: AcquireIOSupport.AcquireIOConfig
   @objc final public var buttonImageName: Swift.String {
@@ -56,16 +169,16 @@ import WebKit
   @objc final public func setDict(_ dict: [Swift.String : Any])
   @objc deinit
 }
-extension UIFont {
-  public static let loadAcquireIOSupportFonts: ()
+extension UIDevice {
+  public var type: AcquireIOSupport.Model {
+    get
+  }
 }
-@objc public enum ChannelType : Swift.Int {
-  case chat = 1
-  case audio = 2
-  case video = 3
-  public init(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
+public enum Model : Swift.String {
+  case simulator, iPod1, iPod2, iPod3, iPod4, iPod5, iPod6, iPod7, iPad2, iPad3, iPad4, iPadAir, iPadAir2, iPadAir3, iPadAir4, iPad5, iPad6, iPad7, iPad8, iPadMini, iPadMini2, iPadMini3, iPadMini4, iPadMini5, iPadPro9_7, iPadPro10_5, iPadPro11, iPadPro2_11, iPadPro12_9, iPadPro2_12_9, iPadPro3_12_9, iPadPro4_12_9, iPhone4, iPhone4S, iPhone5, iPhone5S, iPhone5C, iPhone6, iPhone6Plus, iPhone6S, iPhone6SPlus, iPhoneSE, iPhone7, iPhone7Plus, iPhone8, iPhone8Plus, iPhoneX, iPhoneXS, iPhoneXSMax, iPhoneXR, iPhone11, iPhone11Pro, iPhone11ProMax, iPhoneSE2, iPhone12Mini, iPhone12, iPhone12Pro, iPhone12ProMax, AppleWatch1, AppleWatchS1, AppleWatchS2, AppleWatchS3, AppleWatchS4, AppleWatchS5, AppleWatchSE, AppleWatchS6, AppleTV1, AppleTV2, AppleTV3, AppleTV4, AppleTV_4K, unrecognized
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -133,128 +246,8 @@ public enum ToastPosition {
   case center
   case bottom
   public static func == (a: AcquireIOSupport.ToastPosition, b: AcquireIOSupport.ToastPosition) -> Swift.Bool
-  public var hashValue: Swift.Int {
-    get
-  }
   public func hash(into hasher: inout Swift.Hasher)
-}
-@objc public enum StartChannelType : Swift.Int {
-  case audio = 0
-  case video
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc public enum AcquireIOAgentStatus : Swift.Int {
-  case online = 0
-  case offline
-  case invisible
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc public enum AcquireIOConnectionStatus : Swift.Int {
-  case notConnected = 0
-  case disconnected
-  case connecting
-  case connected
-  case sessionStarted
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc public enum AcquireIOInteractionEventType : Swift.Int {
-  case audioCallStarted = 0
-  case videoCallStarted
-  case audioCallAnswered
-  case videoCallAnswered
-  case callDeclined
-  case callAutoDeclined
-  case callerViewMinimize
-  case callerViewMaximize
-  case callerViewCameraSwitchToFront
-  case callerViewCameraSwitchToBack
-  case callSpeakerOn
-  case callSpeakerOff
-  case callMute
-  case callUnmute
-  case callVideoOn
-  case callVideoOff
-  case callDisconnected
-  case conversationStart
-  case conversationEnd
-  case conversationFeedbackSubmit
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc public protocol AcquireIODelegate {
-  @objc func didChangeConnectionStatus(status: AcquireIOSupport.AcquireIOConnectionStatus)
-  @objc func didChangeAgentStatus(agentID: Swift.String, andStatus status: AcquireIOSupport.AcquireIOAgentStatus)
-  @objc func onError(error: Swift.Error)
-  @objc func hideSupport()
-  @objc func didReceiveTriggerEvent(_ eventName: Swift.String)
-  @objc func didUserInteracted(withEvent type: AcquireIOSupport.AcquireIOInteractionEventType, withData data: [Swift.String : Any]?)
-  @objc func didReceiveNewMessage(_ message: Any)
-}
-extension AcquireIODelegate {
-  public func didChangeConnectionStatus(status: AcquireIOSupport.AcquireIOConnectionStatus)
-  public func didChangeAgentStatus(agentID: Swift.String, andStatus status: AcquireIOSupport.AcquireIOAgentStatus)
-  public func hideSupport()
-  public func onError(error: Swift.Error)
-  public func didReceiveTriggerEvent(_ eventName: Swift.String)
-  public func didUserInteracted(withEvent type: AcquireIOSupport.AcquireIOInteractionEventType, withData data: [Swift.String : Any]?)
-  public func didReceiveNewMessage(_ message: Any)
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class AcquireIO : ObjectiveC.NSObject {
-  @objc public static let support: AcquireIOSupport.AcquireIO
-  @objc final public var delegate: AcquireIOSupport.AcquireIODelegate?
-  @objc final public func setAccount(_ accountUID: Swift.String, domain: Swift.String = "acquire.io", withOptions optionDictionary: AcquireIOSupport.AcquireIOConfig?)
-  @objc deinit
-}
-extension AcquireIO {
-  @objc final public func showSupport(_ viewController: UIKit.UIViewController)
-  @objc final public func showSupport(_ viewController: UIKit.UIViewController, withMessage message: Swift.String)
-  @objc final public func startSession()
-  @objc final public func startDirectSupportChat(type: AcquireIOSupport.ChannelType)
-  @objc final public func setVisitorHash(_ visitorHash: Swift.String)
-  @objc final public func getVisitorId() -> Swift.String
-  @objc final public func setVisitorDetails(_ data: [Swift.String : Any])
-  @objc final public func setVisitorIdentityFields(_ data: [Swift.String : Any])
-  @objc final public func logoutVisitor()
-  @objc final public func getAvailableAgentCount() -> Swift.Int
-  @objc final public func getOnlineAgentIDs() -> [Foundation.NSNumber]
-}
-extension AcquireIO {
-  @objc final public func dismissChatSupport()
-}
-public enum ReachabilityError : Swift.Error {
-  case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
-  case failedToCreateWithHostname(Swift.String, Swift.Int32)
-  case unableToSetCallback(Swift.Int32)
-  case unableToSetDispatchQueue(Swift.Int32)
-  case unableToGetFlags(Swift.Int32)
-}
-@available(*, unavailable, renamed: "Notification.Name.AIOreachabilityChanged")
-public let ReachabilityChangedNotification: Foundation.NSNotification.Name
-extension UIDevice {
-  public var type: AcquireIOSupport.Model {
-    get
-  }
-}
-public enum Model : Swift.String {
-  case simulator, iPod1, iPod2, iPod3, iPod4, iPod5, iPod6, iPod7, iPad2, iPad3, iPad4, iPadAir, iPadAir2, iPadAir3, iPadAir4, iPad5, iPad6, iPad7, iPad8, iPadMini, iPadMini2, iPadMini3, iPadMini4, iPadMini5, iPadPro9_7, iPadPro10_5, iPadPro11, iPadPro2_11, iPadPro12_9, iPadPro2_12_9, iPadPro3_12_9, iPadPro4_12_9, iPhone4, iPhone4S, iPhone5, iPhone5S, iPhone5C, iPhone6, iPhone6Plus, iPhone6S, iPhone6SPlus, iPhoneSE, iPhone7, iPhone7Plus, iPhone8, iPhone8Plus, iPhoneX, iPhoneXS, iPhoneXSMax, iPhoneXR, iPhone11, iPhone11Pro, iPhone11ProMax, iPhoneSE2, iPhone12Mini, iPhone12, iPhone12Pro, iPhone12ProMax, AppleWatch1, AppleWatchS1, AppleWatchS2, AppleWatchS3, AppleWatchS4, AppleWatchS5, AppleWatchSE, AppleWatchS6, AppleTV1, AppleTV2, AppleTV3, AppleTV4, AppleTV_4K, unrecognized
-  public typealias RawValue = Swift.String
-  public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public var hashValue: Swift.Int {
     get
   }
 }
@@ -360,11 +353,6 @@ extension CDVisitorData {
     @objc set
   }
 }
-extension AcquireIOSupport.ChannelType : Swift.Equatable {}
-extension AcquireIOSupport.ChannelType : Swift.Hashable {}
-extension AcquireIOSupport.ChannelType : Swift.RawRepresentable {}
-extension AcquireIOSupport.ToastPosition : Swift.Equatable {}
-extension AcquireIOSupport.ToastPosition : Swift.Hashable {}
 extension AcquireIOSupport.StartChannelType : Swift.Equatable {}
 extension AcquireIOSupport.StartChannelType : Swift.Hashable {}
 extension AcquireIOSupport.StartChannelType : Swift.RawRepresentable {}
@@ -377,6 +365,11 @@ extension AcquireIOSupport.AcquireIOConnectionStatus : Swift.RawRepresentable {}
 extension AcquireIOSupport.AcquireIOInteractionEventType : Swift.Equatable {}
 extension AcquireIOSupport.AcquireIOInteractionEventType : Swift.Hashable {}
 extension AcquireIOSupport.AcquireIOInteractionEventType : Swift.RawRepresentable {}
+extension AcquireIOSupport.ChannelType : Swift.Equatable {}
+extension AcquireIOSupport.ChannelType : Swift.Hashable {}
+extension AcquireIOSupport.ChannelType : Swift.RawRepresentable {}
 extension AcquireIOSupport.Model : Swift.Equatable {}
 extension AcquireIOSupport.Model : Swift.Hashable {}
 extension AcquireIOSupport.Model : Swift.RawRepresentable {}
+extension AcquireIOSupport.ToastPosition : Swift.Equatable {}
+extension AcquireIOSupport.ToastPosition : Swift.Hashable {}

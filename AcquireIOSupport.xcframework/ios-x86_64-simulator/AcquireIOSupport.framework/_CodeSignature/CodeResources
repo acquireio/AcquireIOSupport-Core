@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AIOcoreData.momd/VersionInfo.plist</key>
+		<data>
+		O5ei499Eqk+KdtwVZwig3A6EWgk=
+		</data>
+		<key>AIOcoreData.momd/coreData.mom</key>
+		<data>
+		i1pHuR+vfntbekTzvbHFMQUIIPY=
+		</data>
 		<key>Headers/AcquireIOSupport-Swift.h</key>
 		<data>
-		TqvVC9kwYObl9loY1zSBMR/SxVs=
+		y22YrR8di2TQzFR66cjHNthSHvA=
 		</data>
 		<key>Headers/AcquireIOSupport.h</key>
 		<data>
@@ -14,31 +22,31 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Mv3vom7k3nMwiLO6r/5ea4jQr+0=
+		M0Ape8cE/mCY6EIOBhkGESWpXsA=
 		</data>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ErlJW8v+gvyPXBdjAzlJKdNB2B4=
+		FWkzpp9aT3mK3uSiBzBu4Xqo6po=
 		</data>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		xWsa66OGXLT0xClDHrX0lO69kcQ=
+		o9X4UdS7g3goRgP9+cpKAhj/i/A=
 		</data>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		9w/h+FjBUVQiGmf9RqSB29tAtvQ=
+		Ckt9fw+Tycmcd3WwtZjk89NVIk0=
 		</data>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		ErlJW8v+gvyPXBdjAzlJKdNB2B4=
+		FWkzpp9aT3mK3uSiBzBu4Xqo6po=
 		</data>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		xWsa66OGXLT0xClDHrX0lO69kcQ=
+		o9X4UdS7g3goRgP9+cpKAhj/i/A=
 		</data>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		9w/h+FjBUVQiGmf9RqSB29tAtvQ=
+		Ckt9fw+Tycmcd3WwtZjk89NVIk0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -56,14 +64,6 @@
 		<data>
 		S92UF7TdyP1NgV6ehhUJllDEPT4=
 		</data>
-		<key>coreData.momd/VersionInfo.plist</key>
-		<data>
-		O5ei499Eqk+KdtwVZwig3A6EWgk=
-		</data>
-		<key>coreData.momd/coreData.mom</key>
-		<data>
-		i1pHuR+vfntbekTzvbHFMQUIIPY=
-		</data>
 		<key>outgoing.mp3</key>
 		<data>
 		m++WNDx0vg6uRFeIc/vmtDkGU8A=
@@ -71,11 +71,25 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AIOcoreData.momd/VersionInfo.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KHeJOysKhzUfALNCfpg9nG8+xAlYOOAozlv9ICfuGU4=
+			</data>
+		</dict>
+		<key>AIOcoreData.momd/coreData.mom</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			K5V1hUdFgBXlu5csOROkTNzs+mcyc5p8Z2+1+3K0Ko0=
+			</data>
+		</dict>
 		<key>Headers/AcquireIOSupport-Swift.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			p46YW7Qu0CnHRBGckR5B2saMhhF6zwoPFMpz9mGOO8A=
+			+4T7v+QYnwKKSbUD98bqSqBgXlgV3jqHhxFW8ZlVr3A=
 			</data>
 		</dict>
 		<key>Headers/AcquireIOSupport.h</key>
@@ -89,42 +103,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vC/g52I3MzRCBWEKEfFUe0QJwmBv/EjrSxrPloccOjQ=
+			iMobfVuvglEv74kiT3qwCRDBB7788QucNyjky6IPodw=
 			</data>
 		</dict>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EQxgIhLfINTnpNpCpihdIxVZr5iIBaO4fAaUDpwtgV8=
+			49ucegv8NEHnLrCE+f1uzxu4aX7UPgqLAk4eS6y0Tm4=
 			</data>
 		</dict>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dCHsv5dTJGNl03UQ97zBnxAKG1f/WmvKYb2aSVD8pVg=
+			kfo9OuyJPtzEqaIYq1twMPWOh0S+9/6cA6jucjFNrPQ=
 			</data>
 		</dict>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vC/g52I3MzRCBWEKEfFUe0QJwmBv/EjrSxrPloccOjQ=
+			iMobfVuvglEv74kiT3qwCRDBB7788QucNyjky6IPodw=
 			</data>
 		</dict>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EQxgIhLfINTnpNpCpihdIxVZr5iIBaO4fAaUDpwtgV8=
+			49ucegv8NEHnLrCE+f1uzxu4aX7UPgqLAk4eS6y0Tm4=
 			</data>
 		</dict>
 		<key>Modules/AcquireIOSupport.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dCHsv5dTJGNl03UQ97zBnxAKG1f/WmvKYb2aSVD8pVg=
+			kfo9OuyJPtzEqaIYq1twMPWOh0S+9/6cA6jucjFNrPQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -153,20 +167,6 @@
 			<key>hash2</key>
 			<data>
 			bdLnNCoaGVaf+4ZY2tPmup1BJdJPM6GIX75CVHGyu0M=
-			</data>
-		</dict>
-		<key>coreData.momd/VersionInfo.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KHeJOysKhzUfALNCfpg9nG8+xAlYOOAozlv9ICfuGU4=
-			</data>
-		</dict>
-		<key>coreData.momd/coreData.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			K5V1hUdFgBXlu5csOROkTNzs+mcyc5p8Z2+1+3K0Ko0=
 			</data>
 		</dict>
 		<key>outgoing.mp3</key>

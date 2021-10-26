@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = 'AcquireIOSupport-Core'
-  s.version          = '1.1.1'
+  s.version          = '1.1.2'
   s.summary          = 'Your complete customer communication platform - and not just live chat'
-  s.homepage         = 'https://acquire.io/'
+  s.homepage         = 'https://developer.acquire.io/sdk/ios/sdk-setup-guide/integration-guide-core'
   s.license          = { :type => 'Commercial', :text => 'Copyright (C) 2021 by Acquire' }
-  s.author           = { 'Acquire' => 'chirag.savaliya@acquire.io' }
+  s.author           = { 'Acquire io' => 'chirag.savaliya@acquire.io' }
   s.source           = { :git => 'https://github.com/acquireio/AcquireIOSupport-Core.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/acquire_io'
   
